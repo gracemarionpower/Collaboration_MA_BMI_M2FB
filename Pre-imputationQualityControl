@@ -1,0 +1,12 @@
+#Pre-imputation Quality Control
+#Generate a new dataset with the following filters applied
+
+
+plink \
+ 	--bfile [X]/data_chr${ii} \
+ 	--maf 0.01 \
+ 	--hwe 1e-6 \
+ 	--geno 0.05 \
+ 	--mind 0.05 \
+ 	--make-bed \
+ 	--out ~[X]/geno_qc${ii}
