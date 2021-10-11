@@ -1,0 +1,39 @@
+#Estimate the genetic relationship matrix (GRM) between pairs of individuals from a set of SNPs
+# For more information visit: https://cnsgenomics.com/software/gcta/#MakingaGRM
+
+#The chrs.txt file lists the separate QC'd PLINK files for each chromosome
+#The total_phenokeep.txt lists the two ID columns (family and individual) of partipants with phenotype data - this is for the purposes of reducing the computational time when constructing the GRM
+
+#you must have the following GCTA version installed
+wget https://cnsgenomics.com/software/gcta/bin/gcta_1.93.2beta.zip
+
+gcta64 
+--mbfile chrs.txt \
+--keep total_phenokeep.txt \
+--make-grm \
+--out grm_file
+
+#Then convert the GRM to a sparse GRM
+# For more information visit: https://cnsgenomics.com/software/gcta/#fastGWA
+
+gcta64 
+--grm grm_file \
+--make-bK-sparse 0.05 \
+--out sparse_grm  
+
+# Then run a fastGWA mixed model (based on the sparse GRM generated above)
+# For more information visit: https://cnsgenomics.com/software/gcta/#fastGWA
+
+#The chrs_plink.txt lists PLINK files for each chromosome
+#the total_pheno.txt file lists the phenotype data in the third column (the family and individual data in the first two columns)
+#the total_pheno.txt file lists the continuious covariate data (age and 20 PCs) in the third+ columns (the family and individual data in the first two columns)
+
+gcta64 
+--mbfile chrs_plink.txt \
+--grm-sparse sparse_grm \
+--fastGWA-mlm  \
+--keep total_bc_phenokeep.txt \
+--pheno ~/[X]/total/total_pheno.txt \
+--qcovar ~/[X]/total_covar.txt \
+--threads 10 \
+--out ~/[X]/geno_assoc
