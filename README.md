@@ -1,4 +1,5 @@
-# Collaboration_MA_BMI_M2FB
-This project on GitHub has been developed to provide code for the data preparation and GWAS analyses on BMI between menarche and first birth for analysts in each of the participating cohorts.
+# Collaboration code for: Lifecourse Genome-Wide Association Study Meta-Analysis Refines the Critical Life Stages for the Influence of Adiposity on Breast Cancer
 
-These scripts come with accompanying Analysis plan and SOP documentation that are sent to Analysts and PIs
+This repository on GitHub exists to provide code for the data preparation and GWAS analyses on BMI between menarche and first birth for analysts in each of the participating cohorts
+
+This code comes with an accompanying an Analysis plan and SOP that are sent to Analysts and PIs directly. 
